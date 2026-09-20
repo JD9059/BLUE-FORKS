@@ -18,9 +18,7 @@ body {
     color: #17324d;
 }
 
-button,
-select,
-input {
+button, select, input {
     font-family: inherit;
 }
 
@@ -28,18 +26,21 @@ button {
     cursor: pointer;
     border: none;
     border-radius: 12px;
-    padding: 12px 17px;
+    padding: 12px 16px;
     font-size: 16px;
     font-weight: bold;
 }
 
-/* WHO ARE YOU SCREEN */
+.hidden {
+    display: none !important;
+}
+
+/* LOGIN */
 
 #loginScreen {
     min-height: 100vh;
     padding: 35px 20px;
     text-align: center;
-    background: #bfe9ff;
 }
 
 .loginBox {
@@ -48,12 +49,11 @@ button {
     margin: auto;
     padding: 30px;
     border-radius: 25px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.18);
+    box-shadow: 0 8px 25px rgba(0,0,0,.18);
 }
 
 .loginBox h1 {
     font-size: 42px;
-    margin-bottom: 5px;
 }
 
 .personGrid {
@@ -65,32 +65,37 @@ button {
 
 .personButton {
     background: #e5f7ff;
-    color: #17324d;
     border: 2px solid #91d8f7;
-    font-size: 19px;
+    color: #17324d;
 }
 
 .personButton:hover {
     background: #ccefff;
 }
 
-/* CONFIRM PERSON POPUP */
+#loginMessage {
+    font-weight: bold;
+    margin-top: 20px;
+    color: #b52d2d;
+}
+
+/* CONFIRM PERSON */
 
 #personConfirm {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.45);
+    background: rgba(0,0,0,.5);
     align-items: center;
     justify-content: center;
-    z-index: 1000;
+    z-index: 2000;
 }
 
 .confirmBox {
     background: white;
     width: 90%;
     max-width: 430px;
-    padding: 25px;
+    padding: 28px;
     border-radius: 20px;
     text-align: center;
 }
@@ -105,61 +110,35 @@ button {
     color: white;
 }
 
-/* MAIN SITE */
+/* SITE */
 
 #mainSite {
     display: none;
 }
-
-header {
-    background: #5bbce8;
-    color: white;
-    text-align: center;
-    padding: 70px 15px 25px;
-    border-bottom: 6px solid white;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 45px;
-}
-
-header p {
-    font-size: 18px;
-}
-
-/* TOP BAR */
 
 #topBar {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    min-height: 55px;
+    min-height: 58px;
+    padding: 7px 12px;
     background: #168bd2;
-    z-index: 500;
     display: flex;
     align-items: center;
-    padding: 7px 12px;
     gap: 8px;
+    z-index: 1000;
 }
 
-.panelButton {
+.topButton {
     background: white;
     color: #168bd2;
 }
 
 #ownerButton {
-    display: none;
     background: #ffd84d;
     color: #513f00;
 }
-
-#employeeButton {
-    display: none;
-}
-
-/* USER BUTTON */
 
 .userArea {
     margin-left: auto;
@@ -175,17 +154,17 @@ header p {
     display: none;
     position: absolute;
     right: 0;
-    top: 48px;
+    top: 49px;
+    min-width: 180px;
     background: white;
+    padding: 12px;
     border-radius: 12px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.25);
-    padding: 10px;
-    min-width: 150px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.25);
 }
 
 #userRoleText {
-    font-size: 13px;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    font-weight: bold;
 }
 
 .logoutButton {
@@ -194,47 +173,61 @@ header p {
     color: white;
 }
 
-/* ANNOUNCEMENT */
+header {
+    padding: 85px 15px 28px;
+    text-align: center;
+    background: #5bbce8;
+    color: white;
+    border-bottom: 6px solid white;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 44px;
+}
 
 #announcementBar {
     display: none;
+    padding: 13px;
     background: #fff0a8;
-    color: #483b00;
-    padding: 12px;
+    color: #493c00;
     text-align: center;
     font-weight: bold;
 }
 
-/* CONTENT */
+#connectionMessage {
+    text-align: center;
+    font-weight: bold;
+    padding: 10px;
+}
 
 .container {
     width: 92%;
-    max-width: 750px;
-    margin: 30px auto;
+    max-width: 800px;
+    margin: 25px auto;
 }
 
 .card {
     background: white;
     padding: 25px;
-    border-radius: 20px;
     margin-bottom: 20px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.14);
 }
 
 label {
     display: block;
-    font-weight: bold;
     margin-top: 18px;
     margin-bottom: 7px;
+    font-weight: bold;
 }
 
-select,
-input {
+select, input {
     width: 100%;
     padding: 13px;
-    font-size: 17px;
-    border-radius: 10px;
     border: 2px solid #91d8f7;
+    border-radius: 10px;
+    font-size: 16px;
 }
 
 .mainButton {
@@ -245,10 +238,16 @@ input {
 }
 
 .secondaryButton {
+    width: 100%;
+    margin-top: 10px;
     background: #666;
     color: white;
-    margin-top: 10px;
-    width: 100%;
+}
+
+.backButton {
+    background: #555;
+    color: white;
+    margin-bottom: 15px;
 }
 
 /* INGREDIENTS */
@@ -297,96 +296,108 @@ input {
     color: white;
 }
 
-/* PAGES */
-
-#confirmationPage,
-#employeePage,
-#ownerPage {
-    display: none;
-}
+/* ORDER */
 
 .orderSummary {
     background: #eefaff;
-    border-radius: 12px;
     padding: 15px;
+    border-radius: 12px;
     line-height: 1.8;
 }
-
-/* ORDERS */
 
 .orderCard {
     background: #eefaff;
     border: 2px solid #91d8f7;
-    padding: 16px;
+    padding: 17px;
     border-radius: 15px;
-    margin-top: 15px;
-    line-height: 1.6;
+    margin-top: 14px;
+    line-height: 1.7;
+}
+
+.orderNumber {
+    font-size: 20px;
+    font-weight: bold;
+    color: #168bd2;
 }
 
 .finishButton {
+    margin-top: 10px;
+    margin-right: 7px;
     background: #40b96e;
     color: white;
-    margin-right: 8px;
-    margin-top: 10px;
 }
 
 .cancelButton {
+    margin-top: 10px;
     background: #e55353;
     color: white;
+}
+
+/* STAFF */
+
+.staffBox {
+    background: #eefaff;
+    border: 2px solid #91d8f7;
+    padding: 14px;
+    border-radius: 13px;
     margin-top: 10px;
 }
 
-.backButton {
-    background: #555;
+.clockedIn {
+    color: #18894b;
+    font-weight: bold;
+}
+
+.clockedOut {
+    color: #777;
+    font-weight: bold;
+}
+
+.clockButton {
+    width: 100%;
+    background: #674bd9;
     color: white;
     margin-bottom: 15px;
 }
 
-/* OWNER PANEL */
+/* OWNER */
 
 .ownerTitle {
     background: #ffd84d;
-    padding: 12px;
-    border-radius: 12px;
     text-align: center;
-}
-
-.memberBox {
-    background: #eefaff;
-    border: 2px solid #91d8f7;
-    padding: 15px;
-    margin-top: 12px;
-    border-radius: 14px;
-}
-
-.memberName {
-    font-size: 19px;
-    font-weight: bold;
-}
-
-.memberRole {
-    margin-top: 5px;
+    padding: 13px;
+    border-radius: 12px;
 }
 
 .ownerControls {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2,1fr);
     gap: 9px;
     margin-top: 15px;
 }
 
+.promoteButton {
+    background: #39a866;
+    color: white;
+}
+
+.demoteButton {
+    background: #df9731;
+    color: white;
+}
+
 .hireButton {
-    background: #3caf6c;
+    background: #28a65c;
     color: white;
 }
 
 .fireButton {
-    background: #ef8b31;
+    background: #e06835;
     color: white;
 }
 
 .kickButton {
-    background: #d9c536;
+    background: #e0ca37;
 }
 
 .banButton {
@@ -399,19 +410,23 @@ input {
     color: white;
 }
 
-#selectedPersonInfo {
-    background: #eefaff;
-    padding: 12px;
-    border-radius: 12px;
-    margin-top: 12px;
+.coOwnerButton {
+    background: #a46de0;
+    color: white;
 }
 
-/* CONNECTION */
-
-#connectionMessage {
-    text-align: center;
+#selectedPersonInfo {
+    background: #eefaff;
+    padding: 13px;
+    margin-top: 12px;
+    border-radius: 12px;
     font-weight: bold;
-    padding: 8px;
+}
+
+.sectionTitle {
+    margin-top: 30px;
+    padding-bottom: 6px;
+    border-bottom: 3px solid #91d8f7;
 }
 
 /* TOAST */
@@ -419,35 +434,25 @@ input {
 #toast {
     display: none;
     position: fixed;
-    bottom: 20px;
     left: 50%;
+    bottom: 20px;
     transform: translateX(-50%);
+    padding: 14px 20px;
     background: #17324d;
     color: white;
-    padding: 14px 20px;
     border-radius: 14px;
-    z-index: 2000;
+    z-index: 3000;
     font-weight: bold;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
-.sectionTitle {
-    margin-top: 30px;
-    border-bottom: 3px solid #91d8f7;
-    padding-bottom: 6px;
-}
-
-@media (max-width: 600px) {
-    .personGrid {
+@media(max-width:600px) {
+    .personGrid,
+    .ownerControls {
         grid-template-columns: 1fr;
     }
 
     header h1 {
-        font-size: 35px;
-    }
-
-    .ownerControls {
-        grid-template-columns: 1fr;
+        font-size: 34px;
     }
 }
 </style>
@@ -459,489 +464,356 @@ input {
 
 <div id="loginScreen">
 
-    <div class="loginBox">
+<div class="loginBox">
 
-        <h1>🍕 The Blue Forks 🍴</h1>
+<h1>🍕 The Blue Forks 🍴</h1>
 
-        <h2>Choose who you actually are</h2>
+<h2>Choose who you actually are</h2>
 
-        <p>
-            Please select your name.
-        </p>
+<p>Please select your name.</p>
 
-        <div class="personGrid">
+<div class="personGrid">
 
-            <button class="personButton" onclick="pickPerson('Jack')">
-                Jack
-            </button>
-
-            <button class="personButton" onclick="pickPerson('Joy')">
-                Joy
-            </button>
-
-            <button class="personButton" onclick="pickPerson('Cola')">
-                Cola
-            </button>
-
-            <button class="personButton" onclick="pickPerson('Jeremy')">
-                Jeremy
-            </button>
-
-            <button class="personButton" onclick="pickPerson('Jill')">
-                Jill
-            </button>
-
-            <button class="personButton" onclick="pickPerson('Christina')">
-                Christina
-            </button>
-
-            <button class="personButton" onclick="pickPerson('Rilla')">
-                Rilla
-            </button>
-
-            <button class="personButton" onclick="pickPerson('Papa')">
-                Papa
-            </button>
-
-        </div>
-
-        <p id="loginMessage"></p>
-
-    </div>
+<button class="personButton" onclick="pickPerson('Jack')">Jack</button>
+<button class="personButton" onclick="pickPerson('Joy')">Joy</button>
+<button class="personButton" onclick="pickPerson('Cola')">Cola</button>
+<button class="personButton" onclick="pickPerson('Jeremy')">Jeremy</button>
+<button class="personButton" onclick="pickPerson('Jill')">Jill</button>
+<button class="personButton" onclick="pickPerson('Christina')">Christina</button>
+<button class="personButton" onclick="pickPerson('Rilla')">Rilla</button>
+<button class="personButton" onclick="pickPerson('Papa')">Papa</button>
 
 </div>
 
+<p id="loginMessage"></p>
 
-<!-- CONFIRM WHO YOU ARE -->
+</div>
+</div>
+
+<!-- CONFIRM PERSON -->
 
 <div id="personConfirm">
 
-    <div class="confirmBox">
+<div class="confirmBox">
 
-        <h2 id="confirmPersonText">
-            Are you sure?
-        </h2>
+<h2 id="confirmPersonText"></h2>
 
-        <button
-            class="yesButton"
-            onclick="confirmPerson()">
-            Yes
-        </button>
-
-        <button
-            class="noButton"
-            onclick="cancelPerson()">
-            No
-        </button>
-
-    </div>
+<button class="yesButton" onclick="confirmPerson()">Yes</button>
+<button class="noButton" onclick="cancelPerson()">No</button>
 
 </div>
+</div>
 
-
-<!-- MAIN WEBSITE -->
+<!-- MAIN -->
 
 <div id="mainSite">
 
-    <div id="topBar">
+<div id="topBar">
 
-        <button
-            id="employeeButton"
-            class="panelButton"
-            onclick="showEmployeePanel()">
-            👨‍🍳 Employee Panel
-        </button>
+<button
+id="employeeButton"
+class="topButton"
+onclick="showEmployeePanel()">
+👨‍🍳 Employee Panel
+</button>
 
-        <button
-            id="ownerButton"
-            onclick="showOwnerPanel()">
-            👑 Owner Panel
-        </button>
+<button
+id="ownerButton"
+class="topButton"
+onclick="showOwnerPanel()">
+👑 Management
+</button>
 
-        <div class="userArea">
+<div class="userArea">
 
-            <button
-                id="userButton"
-                onclick="toggleUserMenu()">
-                User ▼
-            </button>
+<button id="userButton" onclick="toggleUserMenu()">
+User ▼
+</button>
 
-            <div id="userMenu">
+<div id="userMenu">
 
-                <div id="userRoleText"></div>
+<div id="userRoleText"></div>
 
-                <button
-                    class="logoutButton"
-                    onclick="logout()">
-                    Log Out
-                </button>
+<button class="logoutButton" onclick="logout()">
+Log Out
+</button>
 
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <header>
-
-        <h1>🍕 The Blue Forks 🍴</h1>
-
-        <p>Fresh pizza made your way!</p>
-
-    </header>
-
-
-    <div id="announcementBar"></div>
-
-    <div id="connectionMessage">
-        Connecting to Blue Forks...
-    </div>
-
-
-    <div class="container">
-
-
-        <!-- CUSTOMER ORDER PAGE -->
-
-        <div id="orderPage">
-
-            <div class="card">
-
-                <h2>Build Your Pizza</h2>
-
-
-                <label>Type of Pizza</label>
-
-                <select id="pizzaType">
-
-                    <option value="">
-                        Choose a pizza...
-                    </option>
-
-                    <option>Cheese Pizza</option>
-                    <option>Pepperoni Pizza</option>
-                    <option>Sausage Pizza</option>
-                    <option>Veggie Pizza</option>
-                    <option>Supreme Pizza</option>
-                    <option>Hawaiian Pizza</option>
-                    <option>Meat Lovers Pizza</option>
-                    <option>BBQ Chicken Pizza</option>
-                    <option>Buffalo Chicken Pizza</option>
-                    <option>Margherita Pizza</option>
-                    <option>White Pizza</option>
-                    <option>Mushroom Pizza</option>
-                    <option>Bacon Pizza</option>
-                    <option>Chicken Pizza</option>
-                    <option>Custom Pizza</option>
-
-                </select>
-
-
-                <label>Extra Ingredients</label>
-
-                <button
-                    class="ingredientButton"
-                    onclick="toggleIngredients()">
-                    ➕ Ingredients
-                </button>
-
-
-                <div id="ingredientsBox">
-
-                    <label class="ingredient">
-                        <input type="checkbox" value="Extra Cheese">
-                        Extra Cheese
-                    </label>
-
-                    <label class="ingredient">
-                        <input type="checkbox" value="Pepperoni">
-                        Pepperoni
-                    </label>
-
-                    <label class="ingredient">
-                        <input type="checkbox" value="Sausage">
-                        Sausage
-                    </label>
-
-                    <label class="ingredient">
-                        <input type="checkbox" value="Bacon">
-                        Bacon
-                    </label>
-
-                    <label class="ingredient">
-                        <input type="checkbox" value="Ham">
-                        Ham
-                    </label>
-
-                    <label class="ingredient">
-                        <input type="checkbox" value="Chicken">
-                        Chicken
-                    </label>
-
-                    <label class="ingredient">
-                        <input type="checkbox" value="Mushrooms">
-                        Mushrooms
-                    </label>
-
-                    <label class="ingredient">
-                        <input type="checkbox" value="Onions">
-                        Onions
-                    </label>
-
-                    <label class="ingredient">
-                        <input type="checkbox" value="Green Peppers">
-                        Green Peppers
-                    </label>
-
-                    <label class="ingredient">
-                        <input type="checkbox" value="Black Olives">
-                        Black Olives
-                    </label>
-
-                    <label class="ingredient">
-                        <input type="checkbox" value="Pineapple">
-                        Pineapple
-                    </label>
-
-                    <label class="ingredient">
-                        <input type="checkbox" value="Jalapeños">
-                        Jalapeños
-                    </label>
-
-                </div>
-
-
-                <label>Sauce?</label>
-
-                <div class="sauceButtons">
-
-                    <button
-                        id="yesSauce"
-                        class="choiceButton"
-                        onclick="chooseSauce('Yes')">
-                        Yes
-                    </button>
-
-                    <button
-                        id="noSauce"
-                        class="choiceButton"
-                        onclick="chooseSauce('No')">
-                        No
-                    </button>
-
-                </div>
-
-
-                <label>First Name</label>
-
-                <input
-                    id="firstName"
-                    placeholder="First name">
-
-
-                <label>Last Name</label>
-
-                <input
-                    id="lastName"
-                    placeholder="Last name">
-
-
-                <button
-                    class="mainButton"
-                    onclick="reviewOrder()">
-                    Review Order 🍕
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- CONFIRM ORDER -->
-
-        <div id="confirmationPage">
-
-            <div class="card">
-
-                <h2>Is Your Order Correct?</h2>
-
-                <div
-                    id="confirmationDetails"
-                    class="orderSummary">
-                </div>
-
-                <button
-                    class="mainButton"
-                    onclick="confirmOrder()">
-                    ✅ Confirm Order
-                </button>
-
-                <button
-                    class="secondaryButton"
-                    onclick="editOrder()">
-                    ✏️ Go Back & Edit
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- EMPLOYEE PANEL -->
-
-        <div id="employeePage">
-
-            <button
-                class="backButton"
-                onclick="goHome()">
-                ← Back
-            </button>
-
-            <div class="card">
-
-                <h2>👨‍🍳 Employee Panel</h2>
-
-                <h3 class="sectionTitle">
-                    Waiting Orders
-                </h3>
-
-                <div id="activeOrders">
-                    Loading...
-                </div>
-
-
-                <h3 class="sectionTitle">
-                    Order History
-                </h3>
-
-                <div id="orderHistory">
-                    Loading...
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- OWNER PANEL -->
-
-        <div id="ownerPage">
-
-            <button
-                class="backButton"
-                onclick="goHome()">
-                ← Back
-            </button>
-
-            <div class="card">
-
-                <h2 class="ownerTitle">
-                    👑 Blue Forks Owner Panel
-                </h2>
-
-
-                <h3>📢 Make Announcement</h3>
-
-                <input
-                    id="announcementInput"
-                    placeholder="Type an announcement...">
-
-                <button
-                    class="mainButton"
-                    onclick="sendAnnouncement()">
-                    Send Announcement
-                </button>
-
-                <button
-                    class="secondaryButton"
-                    onclick="clearAnnouncement()">
-                    Clear Announcement
-                </button>
-
-
-                <h3 class="sectionTitle">
-                    👨‍🍳 Workers
-                </h3>
-
-                <div id="workerList"></div>
-
-
-                <h3 class="sectionTitle">
-                    🙂 Customers
-                </h3>
-
-                <div id="customerList"></div>
-
-
-                <h3 class="sectionTitle">
-                    ⚙️ Manage Person
-                </h3>
-
-                <select
-                    id="personSelect"
-                    onchange="selectedPersonChanged()">
-                </select>
-
-
-                <div id="selectedPersonInfo">
-                    Select somebody.
-                </div>
-
-
-                <div class="ownerControls">
-
-                    <button
-                        class="hireButton"
-                        onclick="hirePerson()">
-                        ✅ Hire
-                    </button>
-
-                    <button
-                        class="fireButton"
-                        onclick="firePerson()">
-                        🔥 Fire
-                    </button>
-
-                    <button
-                        class="kickButton"
-                        onclick="kickPerson()">
-                        🚪 Kick
-                    </button>
-
-                    <button
-                        class="banButton"
-                        onclick="banPerson()">
-                        ⛔ Ban
-                    </button>
-
-                    <button
-                        class="unbanButton"
-                        onclick="unbanPerson()">
-                        🔓 Unban
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
+</div>
+</div>
 
 </div>
 
+<header>
+<h1>🍕 The Blue Forks 🍴</h1>
+<p>Fresh pizza made your way!</p>
+</header>
+
+<div id="announcementBar"></div>
+
+<div id="connectionMessage">
+Connecting to Blue Forks...
+</div>
+
+<div class="container">
+
+<!-- ORDER PAGE -->
+
+<div id="orderPage">
+
+<div class="card">
+
+<h2>🍕 Build Your Order</h2>
+
+<label>Type of Pizza</label>
+
+<select id="pizzaType">
+<option value="">Choose a pizza...</option>
+<option>Cheese Pizza</option>
+<option>Pepperoni Pizza</option>
+<option>Sausage Pizza</option>
+<option>Veggie Pizza</option>
+<option>Supreme Pizza</option>
+<option>Hawaiian Pizza</option>
+<option>Meat Lovers Pizza</option>
+<option>BBQ Chicken Pizza</option>
+<option>Buffalo Chicken Pizza</option>
+<option>Margherita Pizza</option>
+<option>White Pizza</option>
+<option>Mushroom Pizza</option>
+<option>Bacon Pizza</option>
+<option>Chicken Pizza</option>
+<option>Custom Pizza</option>
+</select>
+
+<label>Extra Ingredients</label>
+
+<button class="ingredientButton" onclick="toggleIngredients()">
+➕ Ingredients
+</button>
+
+<div id="ingredientsBox">
+
+<label class="ingredient"><input type="checkbox" value="Extra Cheese">Extra Cheese</label>
+<label class="ingredient"><input type="checkbox" value="Pepperoni">Pepperoni</label>
+<label class="ingredient"><input type="checkbox" value="Sausage">Sausage</label>
+<label class="ingredient"><input type="checkbox" value="Bacon">Bacon</label>
+<label class="ingredient"><input type="checkbox" value="Ham">Ham</label>
+<label class="ingredient"><input type="checkbox" value="Chicken">Chicken</label>
+<label class="ingredient"><input type="checkbox" value="Mushrooms">Mushrooms</label>
+<label class="ingredient"><input type="checkbox" value="Onions">Onions</label>
+<label class="ingredient"><input type="checkbox" value="Green Peppers">Green Peppers</label>
+<label class="ingredient"><input type="checkbox" value="Black Olives">Black Olives</label>
+<label class="ingredient"><input type="checkbox" value="Pineapple">Pineapple</label>
+<label class="ingredient"><input type="checkbox" value="Jalapeños">Jalapeños</label>
+
+</div>
+
+<label>Sauce?</label>
+
+<div class="sauceButtons">
+
+<button id="yesSauce" class="choiceButton" onclick="chooseSauce('Yes')">
+Yes
+</button>
+
+<button id="noSauce" class="choiceButton" onclick="chooseSauce('No')">
+No
+</button>
+
+</div>
+
+<!-- DRINKS -->
+
+<label>🥤 Choose a Drink</label>
+
+<select id="drinkType">
+
+<option value="">Choose a drink...</option>
+<option>Water</option>
+<option>Cola</option>
+<option>Diet Cola</option>
+<option>Lemon-Lime Soda</option>
+<option>Root Beer</option>
+<option>Orange Soda</option>
+<option>Grape Soda</option>
+<option>Ginger Ale</option>
+<option>Lemonade</option>
+<option>Pink Lemonade</option>
+<option>Apple Juice</option>
+<option>Orange Juice</option>
+<option>Grape Juice</option>
+<option>Fruit Punch</option>
+<option>Iced Tea</option>
+<option>Sweet Tea</option>
+<option>Chocolate Milk</option>
+<option>Strawberry Milk</option>
+<option>Hot Chocolate</option>
+<option>Sparkling Water</option>
+
+</select>
+
+<label>First Name</label>
+<input id="firstName" placeholder="First name">
+
+<label>Last Name</label>
+<input id="lastName" placeholder="Last name">
+
+<button class="mainButton" onclick="reviewOrder()">
+Review Order 🍕
+</button>
+
+</div>
+</div>
+
+<!-- CONFIRM ORDER -->
+
+<div id="confirmationPage" class="hidden">
+
+<div class="card">
+
+<h2>Is Your Order Correct?</h2>
+
+<div id="confirmationDetails" class="orderSummary"></div>
+
+<button class="mainButton" onclick="confirmOrder()">
+✅ Confirm Order
+</button>
+
+<button class="secondaryButton" onclick="editOrder()">
+✏️ Go Back & Edit
+</button>
+
+</div>
+</div>
+
+<!-- EMPLOYEE -->
+
+<div id="employeePage" class="hidden">
+
+<button class="backButton" onclick="goHome()">
+← Back
+</button>
+
+<div class="card">
+
+<h2>👨‍🍳 Employee Center</h2>
+
+<div id="employeeIdentity"></div>
+
+<button id="clockButton" class="clockButton" onclick="toggleClock()">
+⏰ Clock In
+</button>
+
+<h3 class="sectionTitle">👥 Staff Status</h3>
+
+<div id="staffStatus"></div>
+
+<h3 class="sectionTitle">🍕 Waiting Orders</h3>
+
+<div id="activeOrders"></div>
+
+<h3 class="sectionTitle">📜 Order History</h3>
+
+<div id="orderHistory"></div>
+
+</div>
+</div>
+
+<!-- OWNER PANEL -->
+
+<div id="ownerPage" class="hidden">
+
+<button class="backButton" onclick="goHome()">
+← Back
+</button>
+
+<div class="card">
+
+<h2 class="ownerTitle">
+👑 Blue Forks Management
+</h2>
+
+<h3>📢 Restaurant Announcement</h3>
+
+<input
+id="announcementInput"
+placeholder="Type an announcement...">
+
+<button class="mainButton" onclick="sendAnnouncement()">
+Send Announcement
+</button>
+
+<button class="secondaryButton" onclick="clearAnnouncement()">
+Clear Announcement
+</button>
+
+<h3 class="sectionTitle">👥 Staff</h3>
+
+<div id="managementStaffList"></div>
+
+<h3 class="sectionTitle">🙂 Customers</h3>
+
+<div id="customerList"></div>
+
+<h3 class="sectionTitle">⚙️ Manage Person</h3>
+
+<select id="personSelect" onchange="selectedPersonChanged()">
+<option value="">Select a person...</option>
+</select>
+
+<div id="selectedPersonInfo">
+Select somebody.
+</div>
+
+<div class="ownerControls">
+
+<button class="hireButton" onclick="hirePerson()">
+✅ Hire
+</button>
+
+<button class="fireButton" onclick="firePerson()">
+🔥 Fire
+</button>
+
+<button class="promoteButton" onclick="promotePerson()">
+⬆️ Promote
+</button>
+
+<button class="demoteButton" onclick="demotePerson()">
+⬇️ Demote
+</button>
+
+<button class="coOwnerButton" onclick="makeCoOwner()">
+⭐ Make Co-Owner
+</button>
+
+<button class="kickButton" onclick="kickPerson()">
+🚪 Kick
+</button>
+
+<button class="banButton" onclick="banPerson()">
+⛔ Ban
+</button>
+
+<button class="unbanButton" onclick="unbanPerson()">
+🔓 Unban
+</button>
+
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
 
 <div id="toast"></div>
-
 
 <script type="module">
 
 import {
     initializeApp
-}
-from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
 
 import {
     getFirestore,
@@ -952,88 +824,69 @@ import {
     getDoc,
     setDoc,
     updateDoc
-}
-from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
 
-/* FIREBASE */
+/*
+ BLUE FORKS FIREBASE
+
+ These are the same Firebase settings
+ from your working Blue Forks website.
+*/
 
 const firebaseConfig = {
 
-    apiKey:
-    "AIzaSyDldRf3kwPDX0oYSQgfZ1RHOH8zK4zvjjA",
+    apiKey: "AIzaSyDldRf3kwPDX0oYSQgfZ1RHOH8zK4zvjjA",
 
-    authDomain:
-    "blue-forks.firebaseapp.com",
+    authDomain: "blue-forks.firebaseapp.com",
 
-    projectId:
-    "blue-forks",
+    projectId: "blue-forks",
 
-    storageBucket:
-    "blue-forks.firebasestorage.app",
+    storageBucket: "blue-forks.firebasestorage.app",
 
-    messagingSenderId:
-    "674854811635",
+    messagingSenderId: "674854811635",
 
-    appId:
-    "1:674854811635:web:ec0d6fe10042729d75c486",
+    appId: "1:674854811635:web:ec0d6fe10042729d75c486",
 
-    measurementId:
-    "G-C5X73BCWKH"
-
+    measurementId: "G-C5X73BCWKH"
 };
 
 
-const app =
-    initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-const db =
-    getFirestore(app);
+
+/* COLLECTIONS */
+
+const ordersCollection =
+    collection(db, "orders");
+
+const membersCollection =
+    collection(db, "members");
+
+const announcementsCollection =
+    collection(db, "announcements");
 
 
 /* DEFAULT PEOPLE */
 
 const defaultPeople = [
 
-    {
-        name: "Jack",
-        role: "owner"
-    },
+    {name:"Jack", role:"owner"},
 
-    {
-        name: "Joy",
-        role: "employee"
-    },
+    {name:"Joy", role:"employee"},
 
-    {
-        name: "Cola",
-        role: "employee"
-    },
+    {name:"Cola", role:"employee"},
 
-    {
-        name: "Jeremy",
-        role: "customer"
-    },
+    {name:"Jeremy", role:"customer"},
 
-    {
-        name: "Jill",
-        role: "customer"
-    },
+    {name:"Jill", role:"customer"},
 
-    {
-        name: "Christina",
-        role: "customer"
-    },
+    {name:"Christina", role:"customer"},
 
-    {
-        name: "Rilla",
-        role: "customer"
-    },
+    {name:"Rilla", role:"customer"},
 
-    {
-        name: "Papa",
-        role: "customer"
-    }
+    {name:"Papa", role:"customer"}
 
 ];
 
@@ -1063,59 +916,40 @@ let ordersReady = false;
 let knownOrderIds = new Set();
 
 
-const ordersCollection =
-    collection(db, "orders");
-
-const membersCollection =
-    collection(db, "members");
-
-const announcementsCollection =
-    collection(db, "announcements");
-
-
-/* CREATE PEOPLE IF NEEDED */
+/* SET UP PEOPLE */
 
 async function setupPeople() {
 
     for (const person of defaultPeople) {
 
         const ref =
-            doc(
-                db,
-                "members",
-                person.name
-            );
+            doc(db, "members", person.name);
 
         const snap =
             await getDoc(ref);
 
         if (!snap.exists()) {
 
-            await setDoc(
-                ref,
-                {
-                    name:
-                        person.name,
+            await setDoc(ref, {
 
-                    role:
-                        person.role,
+                name: person.name,
 
-                    banned:
-                        false,
+                role: person.role,
 
-                    kickAtMs:
-                        0
-                }
-            );
+                banned: false,
+
+                clockedIn: false,
+
+                kickAtMs: 0
+
+            });
 
         }
-
     }
-
 }
 
 
-/* MEMBERS LIVE LIST */
+/* LIVE MEMBER DATA */
 
 onSnapshot(
     membersCollection,
@@ -1124,33 +958,36 @@ onSnapshot(
 
         members = {};
 
-        snapshot.forEach(
-            function(memberDocument) {
+        snapshot.forEach(function(memberDoc) {
 
-                members[
-                    memberDocument.id
-                ] =
-                    memberDocument.data();
+            members[memberDoc.id] =
+                memberDoc.data();
 
-            }
-        );
+        });
 
 
         if (
-            document.getElementById(
-                "ownerPage"
-            ).style.display === "block"
+            !document
+                .getElementById("ownerPage")
+                .classList.contains("hidden")
         ) {
-
             renderOwnerPanel();
+        }
 
+
+        if (
+            !document
+                .getElementById("employeePage")
+                .classList.contains("hidden")
+        ) {
+            renderStaffStatus();
         }
 
     }
 );
 
 
-/* ORDERS LIVE */
+/* LIVE ORDERS */
 
 onSnapshot(
     ordersCollection,
@@ -1158,75 +995,55 @@ onSnapshot(
     function(snapshot) {
 
         const newOrders = [];
+        const newIds = new Set();
 
-        const newIds =
-            new Set();
+        snapshot.forEach(function(orderDoc) {
+
+            const data =
+                orderDoc.data();
+
+            const order = {
+
+                firebaseId:
+                    orderDoc.id,
+
+                ...data
+            };
+
+            newOrders.push(order);
+
+            newIds.add(orderDoc.id);
 
 
-        snapshot.forEach(
-            function(orderDocument) {
+            if (
+                ordersReady &&
+                !knownOrderIds.has(orderDoc.id) &&
+                data.status === "Received" &&
+                isStaff()
+            ) {
 
-                const data =
-                    orderDocument.data();
-
-                const order = {
-
-                    firebaseId:
-                        orderDocument.id,
-
-                    ...data
-
-                };
-
-
-                newOrders.push(order);
-
-                newIds.add(
-                    orderDocument.id
+                showToast(
+                    "🔔 NEW ORDER! Order #" +
+                    getOrderNumber(order) +
+                    " from " +
+                    data.firstName
                 );
 
-
-                if (
-                    ordersReady &&
-                    !knownOrderIds.has(
-                        orderDocument.id
-                    ) &&
-                    data.status === "Received" &&
-                    isStaff()
-                ) {
-
-                    showToast(
-                        "🍕 New order from " +
-                        data.firstName +
-                        "!"
-                    );
-
-                }
-
             }
-        );
+
+        });
 
 
         orders =
             newOrders.sort(
-                function(a, b) {
-
-                    return (
-                        b.createdAtMs || 0
-                    ) -
-                    (
-                        a.createdAtMs || 0
-                    );
-
-                }
+                (a,b) =>
+                    (b.createdAtMs || 0) -
+                    (a.createdAtMs || 0)
             );
 
 
-        knownOrderIds =
-            newIds;
-
-        ordersReady =
-            true;
+        knownOrderIds = newIds;
+        ordersReady = true;
 
 
         document.getElementById(
@@ -1236,13 +1053,11 @@ onSnapshot(
 
 
         if (
-            document.getElementById(
-                "employeePage"
-            ).style.display === "block"
+            !document
+                .getElementById("employeePage")
+                .classList.contains("hidden")
         ) {
-
             renderOrders();
-
         }
 
     },
@@ -1254,7 +1069,7 @@ onSnapshot(
         document.getElementById(
             "connectionMessage"
         ).textContent =
-            "🔴 Could not connect to orders.";
+            "🔴 Could not connect to Blue Forks.";
 
     }
 );
@@ -1267,30 +1082,17 @@ onSnapshot(
 
     function(snapshot) {
 
-        const announcements = [];
+        const list = [];
 
-        snapshot.forEach(
-            function(item) {
-
-                announcements.push(
-                    item.data()
-                );
-
-            }
-        );
+        snapshot.forEach(function(item) {
+            list.push(item.data());
+        });
 
 
-        announcements.sort(
-            function(a, b) {
-
-                return (
-                    b.createdAtMs || 0
-                ) -
-                (
-                    a.createdAtMs || 0
-                );
-
-            }
+        list.sort(
+            (a,b) =>
+                (b.createdAtMs || 0) -
+                (a.createdAtMs || 0)
         );
 
 
@@ -1301,20 +1103,17 @@ onSnapshot(
 
 
         if (
-            announcements.length > 0 &&
-            announcements[0].text
+            list.length &&
+            list[0].text
         ) {
 
             bar.textContent =
-                "📢 " +
-                announcements[0].text;
+                "📢 " + list[0].text;
 
             bar.style.display =
                 "block";
 
-        }
-
-        else {
+        } else {
 
             bar.style.display =
                 "none";
@@ -1325,13 +1124,12 @@ onSnapshot(
 );
 
 
-/* WHO ARE YOU */
+/* LOGIN */
 
 window.pickPerson =
 function(name) {
 
-    pendingPerson =
-        name;
+    pendingPerson = name;
 
     document.getElementById(
         "confirmPersonText"
@@ -1351,8 +1149,7 @@ function(name) {
 window.cancelPerson =
 function() {
 
-    pendingPerson =
-        null;
+    pendingPerson = null;
 
     document.getElementById(
         "personConfirm"
@@ -1365,9 +1162,7 @@ function() {
 window.confirmPerson =
 async function() {
 
-    if (!pendingPerson) {
-        return;
-    }
+    if (!pendingPerson) return;
 
 
     const ref =
@@ -1389,7 +1184,6 @@ async function() {
         );
 
         return;
-
     }
 
 
@@ -1408,13 +1202,11 @@ async function() {
             "loginMessage"
         ).textContent =
             pendingPerson +
-            " is currently banned from Blue Forks.";
+            " is banned from Blue Forks.";
 
-        pendingPerson =
-            null;
+        pendingPerson = null;
 
         return;
-
     }
 
 
@@ -1424,14 +1216,10 @@ async function() {
     );
 
 
-    startSession(
-        pendingPerson
-    );
+    startSession(pendingPerson);
 
 
-    pendingPerson =
-        null;
-
+    pendingPerson = null;
 
     document.getElementById(
         "personConfirm"
@@ -1441,15 +1229,13 @@ async function() {
 };
 
 
-/* START SESSION */
+/* SESSION */
 
 function startSession(name) {
 
-    currentUserName =
-        name;
+    currentUserName = name;
 
-    sessionStartedAt =
-        Date.now();
+    sessionStartedAt = Date.now();
 
 
     document.getElementById(
@@ -1465,20 +1251,14 @@ function startSession(name) {
 
 
     if (currentUserListener) {
-
         currentUserListener();
-
     }
 
 
     currentUserListener =
         onSnapshot(
 
-            doc(
-                db,
-                "members",
-                name
-            ),
+            doc(db, "members", name),
 
             function(snapshot) {
 
@@ -1491,16 +1271,13 @@ function startSession(name) {
                     snapshot.data();
 
 
-                if (
-                    currentUserData.banned
-                ) {
+                if (currentUserData.banned) {
 
                     forceLogout(
-                        "⛔ You have been banned from Blue Forks."
+                        "⛔ You are currently banned from Blue Forks."
                     );
 
                     return;
-
                 }
 
 
@@ -1515,7 +1292,6 @@ function startSession(name) {
                     );
 
                     return;
-
                 }
 
 
@@ -1528,32 +1304,80 @@ function startSession(name) {
 }
 
 
-/* USER DISPLAY */
+/* ROLE HELPERS */
+
+function niceRole(role) {
+
+    if (role === "owner")
+        return "Owner";
+
+    if (role === "co-owner")
+        return "Co-Owner";
+
+    if (role === "senior")
+        return "Senior Employee";
+
+    if (role === "employee")
+        return "Employee";
+
+    return "Customer";
+}
+
+
+function roleLevel(role) {
+
+    if (role === "customer") return 0;
+
+    if (role === "employee") return 1;
+
+    if (role === "senior") return 2;
+
+    if (role === "co-owner") return 3;
+
+    if (role === "owner") return 4;
+
+    return 0;
+}
+
+
+function isStaff() {
+
+    if (!currentUserData)
+        return false;
+
+    return roleLevel(
+        currentUserData.role
+    ) >= 1;
+}
+
+
+function isManagement() {
+
+    if (!currentUserData)
+        return false;
+
+    return (
+        currentUserData.role === "owner" ||
+        currentUserData.role === "co-owner"
+    );
+}
+
+
+/* DISPLAY */
 
 function updateUserDisplay() {
-
-    if (
-        !currentUserName ||
-        !currentUserData
-    ) {
-        return;
-    }
-
 
     document.getElementById(
         "userButton"
     ).textContent =
-        currentUserName +
-        " ▼";
+        currentUserName + " ▼";
 
 
     document.getElementById(
         "userRoleText"
     ).textContent =
-        "Role: " +
-        niceRole(
-            currentUserData.role
-        );
+        "Rank: " +
+        niceRole(currentUserData.role);
 
 
     document.getElementById(
@@ -1567,67 +1391,32 @@ function updateUserDisplay() {
     document.getElementById(
         "ownerButton"
     ).style.display =
-        currentUserData.role ===
-        "owner"
+        isManagement()
         ? "block"
         : "none";
 
 
     if (
-        currentUserData.role ===
-        "customer" &&
-        document.getElementById(
-            "employeePage"
-        ).style.display === "block"
+        !isStaff() &&
+        !document
+            .getElementById("employeePage")
+            .classList.contains("hidden")
     ) {
-
         goHome();
-
     }
 
 
     if (
-        currentUserData.role !==
-        "owner" &&
-        document.getElementById(
-            "ownerPage"
-        ).style.display === "block"
+        !isManagement() &&
+        !document
+            .getElementById("ownerPage")
+            .classList.contains("hidden")
     ) {
-
         goHome();
-
     }
 
-}
 
-
-function niceRole(role) {
-
-    if (role === "owner") {
-        return "Owner";
-    }
-
-    if (role === "employee") {
-        return "Employee";
-    }
-
-    return "Customer";
-
-}
-
-
-function isStaff() {
-
-    return (
-        currentUserData &&
-        (
-            currentUserData.role ===
-            "owner" ||
-            currentUserData.role ===
-            "employee"
-        )
-    );
-
+    updateEmployeeIdentity();
 }
 
 
@@ -1656,21 +1445,17 @@ function() {
         "blueForksCurrentUser"
     );
 
+
     if (currentUserListener) {
 
         currentUserListener();
 
-        currentUserListener =
-            null;
-
+        currentUserListener = null;
     }
 
 
-    currentUserName =
-        null;
-
-    currentUserData =
-        null;
+    currentUserName = null;
+    currentUserData = null;
 
 
     document.getElementById(
@@ -1691,7 +1476,7 @@ function() {
         "none";
 
 
-    goHome();
+    showPage("orderPage");
 
 };
 
@@ -1707,17 +1492,12 @@ function forceLogout(message) {
 
         currentUserListener();
 
-        currentUserListener =
-            null;
-
+        currentUserListener = null;
     }
 
 
-    currentUserName =
-        null;
-
-    currentUserData =
-        null;
+    currentUserName = null;
+    currentUserData = null;
 
 
     document.getElementById(
@@ -1740,7 +1520,7 @@ function forceLogout(message) {
 }
 
 
-/* PIZZA FORM */
+/* ORDER FORM */
 
 window.toggleIngredients =
 function() {
@@ -1761,36 +1541,29 @@ function() {
 window.chooseSauce =
 function(choice) {
 
-    sauceChoice =
-        choice;
+    sauceChoice = choice;
 
 
     document.getElementById(
         "yesSauce"
-    ).classList.remove(
-        "selected"
-    );
+    ).classList.remove("selected");
 
 
     document.getElementById(
         "noSauce"
-    ).classList.remove(
-        "selected"
-    );
+    ).classList.remove("selected");
 
 
     document.getElementById(
         choice === "Yes"
         ? "yesSauce"
         : "noSauce"
-    ).classList.add(
-        "selected"
-    );
+    ).classList.add("selected");
 
 };
 
 
-/* REVIEW ORDER */
+/* REVIEW */
 
 window.reviewOrder =
 function() {
@@ -1798,6 +1571,12 @@ function() {
     const pizza =
         document.getElementById(
             "pizzaType"
+        ).value;
+
+
+    const drink =
+        document.getElementById(
+            "drinkType"
         ).value;
 
 
@@ -1820,7 +1599,6 @@ function() {
         );
 
         return;
-
     }
 
 
@@ -1831,67 +1609,71 @@ function() {
         );
 
         return;
-
     }
 
 
-    if (
-        !firstName ||
-        !lastName
-    ) {
+    if (!drink) {
+
+        alert(
+            "Please choose a drink!"
+        );
+
+        return;
+    }
+
+
+    if (!firstName || !lastName) {
 
         alert(
             "Please enter your first and last name!"
         );
 
         return;
-
     }
-
-
-    const boxes =
-        document.querySelectorAll(
-            "#ingredientsBox input:checked"
-        );
 
 
     const ingredients = [];
 
 
-    boxes.forEach(
-        function(box) {
+    document
+        .querySelectorAll(
+            "#ingredientsBox input:checked"
+        )
+        .forEach(function(box) {
 
             ingredients.push(
                 box.value
             );
 
-        }
-    );
+        });
+
+
+    const createdAtMs =
+        Date.now();
 
 
     currentOrder = {
 
-        firstName:
-            firstName,
+        firstName,
 
-        lastName:
-            lastName,
+        lastName,
 
-        pizza:
-            pizza,
+        pizza,
 
-        ingredients:
-            ingredients,
+        ingredients,
 
-        sauce:
-            sauceChoice,
+        sauce: sauceChoice,
+
+        drink,
 
         orderedAt:
-            new Date()
-            .toLocaleString(),
+            new Date().toLocaleString(),
 
-        createdAtMs:
-            Date.now(),
+        createdAtMs,
+
+        orderNumber:
+            String(createdAtMs)
+                .slice(-6),
 
         status:
             "Received",
@@ -1902,17 +1684,17 @@ function() {
     };
 
 
-    const text =
-        ingredients.length
-        ? ingredients.join(", ")
-        : "None";
-
-
     document.getElementById(
         "confirmationDetails"
     ).innerHTML =
 
-        "<strong>Name:</strong> " +
+        "<strong>Order #" +
+        escapeText(
+            currentOrder.orderNumber
+        ) +
+        "</strong>" +
+
+        "<br><strong>Name:</strong> " +
         escapeText(firstName) +
         " " +
         escapeText(lastName) +
@@ -1921,10 +1703,17 @@ function() {
         escapeText(pizza) +
 
         "<br><strong>Extra Ingredients:</strong> " +
-        escapeText(text) +
+        escapeText(
+            ingredients.length
+            ? ingredients.join(", ")
+            : "None"
+        ) +
 
         "<br><strong>Sauce:</strong> " +
-        escapeText(sauceChoice);
+        escapeText(sauceChoice) +
+
+        "<br><strong>Drink:</strong> 🥤 " +
+        escapeText(drink);
 
 
     showPage(
@@ -1934,14 +1723,13 @@ function() {
 };
 
 
-/* CONFIRM ORDER */
+/* CONFIRM */
 
 window.confirmOrder =
 async function() {
 
-    if (!currentOrder) {
+    if (!currentOrder)
         return;
-    }
 
 
     try {
@@ -1953,7 +1741,9 @@ async function() {
 
 
         alert(
-            "🍕 Order received! The Blue Forks is on it!"
+            "🍕 Order #" +
+            currentOrder.orderNumber +
+            " received!"
         );
 
 
@@ -1963,7 +1753,7 @@ async function() {
 
     }
 
-    catch (error) {
+    catch(error) {
 
         console.error(error);
 
@@ -1979,9 +1769,7 @@ async function() {
 window.editOrder =
 function() {
 
-    showPage(
-        "orderPage"
-    );
+    showPage("orderPage");
 
 };
 
@@ -1998,7 +1786,6 @@ function() {
         );
 
         return;
-
     }
 
 
@@ -2007,10 +1794,191 @@ function() {
     );
 
 
+    updateEmployeeIdentity();
+
+    renderStaffStatus();
+
     renderOrders();
 
 };
 
+
+function updateEmployeeIdentity() {
+
+    if (
+        !currentUserData ||
+        !currentUserName
+    ) return;
+
+
+    const box =
+        document.getElementById(
+            "employeeIdentity"
+        );
+
+
+    box.innerHTML =
+
+        "<div class='staffBox'>" +
+
+        "<strong>" +
+        escapeText(currentUserName) +
+        "</strong><br>" +
+
+        "Rank: " +
+        escapeText(
+            niceRole(
+                currentUserData.role
+            )
+        ) +
+
+        "</div>";
+
+
+    const button =
+        document.getElementById(
+            "clockButton"
+        );
+
+
+    if (currentUserData.clockedIn) {
+
+        button.textContent =
+            "⏰ Clock Out";
+
+    } else {
+
+        button.textContent =
+            "⏰ Clock In";
+
+    }
+
+}
+
+
+/* CLOCK IN / OUT */
+
+window.toggleClock =
+async function() {
+
+    if (!isStaff())
+        return;
+
+
+    const newStatus =
+        !currentUserData.clockedIn;
+
+
+    await updateDoc(
+
+        doc(
+            db,
+            "members",
+            currentUserName
+        ),
+
+        {
+
+            clockedIn:
+                newStatus,
+
+            clockChangedAt:
+                new Date()
+                    .toLocaleString()
+
+        }
+
+    );
+
+
+    showToast(
+        newStatus
+        ? "🟢 You are clocked in!"
+        : "⚪ You are clocked out."
+    );
+
+};
+
+
+/* STAFF STATUS */
+
+function renderStaffStatus() {
+
+    const area =
+        document.getElementById(
+            "staffStatus"
+        );
+
+
+    area.innerHTML = "";
+
+
+    const staff =
+        Object.values(members)
+
+        .filter(
+            person =>
+                roleLevel(
+                    person.role
+                ) >= 1
+        )
+
+        .sort(
+            (a,b) =>
+                roleLevel(b.role) -
+                roleLevel(a.role)
+        );
+
+
+    staff.forEach(function(person) {
+
+        const box =
+            document.createElement(
+                "div"
+            );
+
+
+        box.className =
+            "staffBox";
+
+
+        const status =
+            person.clockedIn
+            ? "🟢 Clocked In"
+            : "⚪ Clocked Out";
+
+
+        box.innerHTML =
+
+            "<strong>" +
+            escapeText(person.name) +
+            "</strong><br>" +
+
+            escapeText(
+                niceRole(person.role)
+            ) +
+
+            "<br><span class='" +
+            (
+                person.clockedIn
+                ? "clockedIn"
+                : "clockedOut"
+            ) +
+            "'>" +
+
+            status +
+
+            "</span>";
+
+
+        area.appendChild(box);
+
+    });
+
+}
+
+
+/* ORDERS */
 
 function renderOrders() {
 
@@ -2027,11 +1995,10 @@ function renderOrders() {
 
 
     active.innerHTML = "";
-
     history.innerHTML = "";
 
 
-    const activeOrders =
+    const waiting =
         orders.filter(
             order =>
                 order.status ===
@@ -2039,7 +2006,7 @@ function renderOrders() {
         );
 
 
-    const oldOrders =
+    const old =
         orders.filter(
             order =>
                 order.status !==
@@ -2047,53 +2014,57 @@ function renderOrders() {
         );
 
 
-    if (
-        activeOrders.length === 0
-    ) {
+    if (!waiting.length) {
 
         active.innerHTML =
             "<p>No orders waiting! 🍕</p>";
-
     }
 
 
-    activeOrders.forEach(
-        function(order) {
+    waiting.forEach(function(order) {
 
-            active.appendChild(
-                makeOrderCard(
-                    order,
-                    true
-                )
-            );
+        active.appendChild(
+            makeOrderCard(
+                order,
+                true
+            )
+        );
 
-        }
-    );
+    });
 
 
-    if (
-        oldOrders.length === 0
-    ) {
+    if (!old.length) {
 
         history.innerHTML =
-            "<p>No finished orders yet.</p>";
-
+            "<p>No order history yet.</p>";
     }
 
 
-    oldOrders.forEach(
-        function(order) {
+    old.forEach(function(order) {
 
-            history.appendChild(
-                makeOrderCard(
-                    order,
-                    false
-                )
-            );
+        history.appendChild(
+            makeOrderCard(
+                order,
+                false
+            )
+        );
 
-        }
-    );
+    });
 
+}
+
+
+function getOrderNumber(order) {
+
+    if (order.orderNumber)
+        return order.orderNumber;
+
+    if (order.createdAtMs)
+        return String(
+            order.createdAtMs
+        ).slice(-6);
+
+    return "------";
 }
 
 
@@ -2121,20 +2092,22 @@ function makeOrderCard(
         : "None";
 
 
-    const title =
+    const number =
         document.createElement(
-            "strong"
+            "div"
         );
 
 
-    title.textContent =
-        "👤 " +
-        order.firstName +
-        " " +
-        order.lastName;
+    number.className =
+        "orderNumber";
 
 
-    card.appendChild(title);
+    number.textContent =
+        "Order #" +
+        getOrderNumber(order);
+
+
+    card.appendChild(number);
 
 
     const details =
@@ -2143,26 +2116,42 @@ function makeOrderCard(
         );
 
 
-    details.style.marginTop =
-        "8px";
+    details.innerHTML =
 
+        "<strong>Customer:</strong> " +
+        escapeText(
+            (order.firstName || "") +
+            " " +
+            (order.lastName || "")
+        ) +
 
-    details.textContent =
+        "<br><strong>Pizza:</strong> " +
+        escapeText(
+            order.pizza || ""
+        ) +
 
-        "Pizza: " +
-        order.pizza +
+        "<br><strong>Ingredients:</strong> " +
+        escapeText(ingredients) +
 
-        " | Ingredients: " +
-        ingredients +
+        "<br><strong>Sauce:</strong> " +
+        escapeText(
+            order.sauce || ""
+        ) +
 
-        " | Sauce: " +
-        order.sauce +
+        "<br><strong>Drink:</strong> 🥤 " +
+        escapeText(
+            order.drink || "None"
+        ) +
 
-        " | Ordered: " +
-        order.orderedAt +
+        "<br><strong>Ordered:</strong> " +
+        escapeText(
+            order.orderedAt || ""
+        ) +
 
-        " | Status: " +
-        order.status;
+        "<br><strong>Status:</strong> " +
+        escapeText(
+            order.status || ""
+        );
 
 
     card.appendChild(details);
@@ -2194,9 +2183,7 @@ function makeOrderCard(
             };
 
 
-        card.appendChild(
-            finish
-        );
+        card.appendChild(finish);
 
 
         const cancel =
@@ -2223,137 +2210,110 @@ function makeOrderCard(
             };
 
 
-        card.appendChild(
-            cancel
-        );
+        card.appendChild(cancel);
 
     }
 
 
     return card;
-
 }
 
 
-/* FINISH ORDER */
+/* FINISH */
 
 async function finishOrder(id) {
 
-    try {
+    await updateDoc(
 
-        await updateDoc(
+        doc(
+            db,
+            "orders",
+            id
+        ),
 
-            doc(
-                db,
-                "orders",
-                id
-            ),
+        {
 
-            {
+            status:
+                "Finished",
 
-                status:
-                    "Finished",
+            finishedAt:
+                new Date()
+                    .toLocaleString(),
 
-                finishedAt:
-                    new Date()
-                    .toLocaleString()
+            finishedBy:
+                currentUserName
 
-            }
+        }
 
-        );
+    );
 
-    }
 
-    catch (error) {
-
-        console.error(error);
-
-        alert(
-            "Could not finish order."
-        );
-
-    }
+    showToast(
+        "✅ Order finished!"
+    );
 
 }
 
 
-/* CANCEL ORDER */
+/* CANCEL */
 
 async function cancelOrder(id) {
 
-    const sure =
-        confirm(
-            "Are you sure you want to cancel this order?"
-        );
+    if (
+        !confirm(
+            "Cancel this order?"
+        )
+    ) return;
 
 
-    if (!sure) {
-        return;
-    }
+    await updateDoc(
+
+        doc(
+            db,
+            "orders",
+            id
+        ),
+
+        {
+
+            status:
+                "Cancelled",
+
+            cancelledAt:
+                new Date()
+                    .toLocaleString(),
+
+            cancelledBy:
+                currentUserName
+
+        }
+
+    );
 
 
-    try {
-
-        await updateDoc(
-
-            doc(
-                db,
-                "orders",
-                id
-            ),
-
-            {
-
-                status:
-                    "Cancelled",
-
-                cancelledAt:
-                    new Date()
-                    .toLocaleString()
-
-            }
-
-        );
-
-    }
-
-    catch (error) {
-
-        console.error(error);
-
-        alert(
-            "Could not cancel order."
-        );
-
-    }
+    showToast(
+        "❌ Order cancelled."
+    );
 
 }
 
 
-/* OWNER PANEL */
+/* MANAGEMENT */
 
 window.showOwnerPanel =
 function() {
 
-    if (
-        !currentUserData ||
-        currentUserData.role !==
-        "owner"
-    ) {
+    if (!isManagement()) {
 
         alert(
-            "Owner access only."
+            "Management access only."
         );
 
         return;
-
     }
 
 
-    showPage(
-        "ownerPage"
-    );
-
+    showPage("ownerPage");
 
     renderOwnerPanel();
 
@@ -2362,13 +2322,13 @@ function() {
 
 function renderOwnerPanel() {
 
-    const workers =
+    const staffArea =
         document.getElementById(
-            "workerList"
+            "managementStaffList"
         );
 
 
-    const customers =
+    const customerArea =
         document.getElementById(
             "customerList"
         );
@@ -2380,106 +2340,118 @@ function renderOwnerPanel() {
         );
 
 
-    workers.innerHTML = "";
+    staffArea.innerHTML = "";
+    customerArea.innerHTML = "";
 
-    customers.innerHTML = "";
+
+    const oldSelection =
+        selector.value;
+
 
     selector.innerHTML =
         "<option value=''>Select a person...</option>";
 
 
     const names =
-        Object.keys(
-            members
-        ).sort();
+        Object.keys(members)
+            .sort();
 
 
-    names.forEach(
-        function(name) {
+    names.forEach(function(name) {
 
-            const person =
-                members[name];
-
-
-            const box =
-                document.createElement(
-                    "div"
-                );
+        const person =
+            members[name];
 
 
-            box.className =
-                "memberBox";
+        const box =
+            document.createElement(
+                "div"
+            );
 
 
-            box.innerHTML =
-
-                "<div class='memberName'>" +
-                escapeText(name) +
-                "</div>" +
-
-                "<div class='memberRole'>" +
-                "Role: " +
-                niceRole(
-                    person.role
-                ) +
-
-                (
-                    person.banned
-                    ? " — ⛔ BANNED"
-                    : ""
-                ) +
-
-                "</div>";
+        box.className =
+            "staffBox";
 
 
-            if (
-                person.role ===
-                "owner" ||
-                person.role ===
-                "employee"
-            ) {
+        box.innerHTML =
 
-                workers.appendChild(
-                    box
-                );
+            "<strong>" +
+            escapeText(name) +
+            "</strong><br>" +
 
-            }
+            "Rank: " +
+            escapeText(
+                niceRole(person.role)
+            ) +
 
-            else {
+            "<br>" +
 
-                customers.appendChild(
-                    box
-                );
+            (
+                person.clockedIn
+                ? "🟢 Clocked In"
+                : "⚪ Clocked Out"
+            ) +
 
-            }
-
-
-            if (
-                person.role !==
-                "owner"
-            ) {
-
-                const option =
-                    document.createElement(
-                        "option"
-                    );
+            (
+                person.banned
+                ? "<br>⛔ BANNED"
+                : ""
+            );
 
 
-                option.value =
-                    name;
+        if (
+            roleLevel(person.role) >= 1
+        ) {
 
-                option.textContent =
-                    name;
+            staffArea.appendChild(box);
 
+        } else {
 
-                selector.appendChild(
-                    option
-                );
-
-            }
+            customerArea.appendChild(box);
 
         }
-    );
+
+
+        /*
+        Jack is the permanent Owner,
+        so he is not placed in the
+        management target list.
+        */
+
+        if (person.role !== "owner") {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+
+            option.value = name;
+
+            option.textContent =
+                name +
+                " — " +
+                niceRole(person.role);
+
+
+            selector.appendChild(option);
+
+        }
+
+    });
+
+
+    if (
+        oldSelection &&
+        members[oldSelection] &&
+        members[oldSelection].role !==
+            "owner"
+    ) {
+
+        selector.value =
+            oldSelection;
+
+    }
 
 
     selectedPersonChanged();
@@ -2487,7 +2459,7 @@ function renderOwnerPanel() {
 }
 
 
-/* SELECT PERSON */
+/* SELECTED PERSON */
 
 window.selectedPersonChanged =
 function() {
@@ -2504,16 +2476,12 @@ function() {
         );
 
 
-    if (
-        !name ||
-        !members[name]
-    ) {
+    if (!name || !members[name]) {
 
         box.textContent =
             "Select somebody.";
 
         return;
-
     }
 
 
@@ -2521,37 +2489,38 @@ function() {
         members[name];
 
 
-    box.textContent =
+    box.innerHTML =
 
-        name +
-        " — " +
-        niceRole(
-            person.role
+        escapeText(name) +
+
+        "<br>Rank: " +
+        escapeText(
+            niceRole(person.role)
         ) +
+
+        "<br>" +
+
+        (
+            person.clockedIn
+            ? "🟢 Clocked In"
+            : "⚪ Clocked Out"
+        ) +
+
         (
             person.banned
-            ? " — BANNED"
+            ? "<br>⛔ BANNED"
             : ""
         );
 
 };
 
 
-/* OWNER ACTION HELPERS */
-
-function getSelectedName() {
-
-    return document.getElementById(
-        "personSelect"
-    ).value;
-
-}
-
-
-function requireSelected() {
+function selectedName() {
 
     const name =
-        getSelectedName();
+        document.getElementById(
+            "personSelect"
+        ).value;
 
 
     if (!name) {
@@ -2561,12 +2530,10 @@ function requireSelected() {
         );
 
         return null;
-
     }
 
 
     return name;
-
 }
 
 
@@ -2576,38 +2543,26 @@ window.hirePerson =
 async function() {
 
     const name =
-        requireSelected();
+        selectedName();
+
+    if (!name) return;
 
 
-    if (!name) {
-        return;
-    }
-
-
-    const sure =
-        confirm(
+    if (
+        !confirm(
             "Hire " +
             name +
-            " as an employee?"
-        );
-
-
-    if (!sure) {
-        return;
-    }
+            " as an Employee?"
+        )
+    ) return;
 
 
     await updateDoc(
 
-        doc(
-            db,
-            "members",
-            name
-        ),
+        doc(db,"members",name),
 
         {
-            role:
-                "employee"
+            role:"employee"
         }
 
     );
@@ -2616,7 +2571,7 @@ async function() {
     showToast(
         "✅ " +
         name +
-        " was hired!"
+        " is now an Employee!"
     );
 
 };
@@ -2628,38 +2583,27 @@ window.firePerson =
 async function() {
 
     const name =
-        requireSelected();
+        selectedName();
+
+    if (!name) return;
 
 
-    if (!name) {
-        return;
-    }
-
-
-    const sure =
-        confirm(
-            "Are you sure you want to fire " +
+    if (
+        !confirm(
+            "Fire " +
             name +
-            "?"
-        );
-
-
-    if (!sure) {
-        return;
-    }
+            " and make them a Customer?"
+        )
+    ) return;
 
 
     await updateDoc(
 
-        doc(
-            db,
-            "members",
-            name
-        ),
+        doc(db,"members",name),
 
         {
-            role:
-                "customer"
+            role:"customer",
+            clockedIn:false
         }
 
     );
@@ -2668,7 +2612,276 @@ async function() {
     showToast(
         "🔥 " +
         name +
-        " was fired."
+        " is now a Customer."
+    );
+
+};
+
+
+/* PROMOTE */
+
+window.promotePerson =
+async function() {
+
+    const name =
+        selectedName();
+
+    if (!name) return;
+
+
+    const person =
+        members[name];
+
+
+    let newRole;
+
+
+    if (
+        person.role === "customer"
+    ) {
+
+        newRole = "employee";
+
+    }
+
+    else if (
+        person.role === "employee"
+    ) {
+
+        newRole = "senior";
+
+    }
+
+    else if (
+        person.role === "senior"
+    ) {
+
+        alert(
+            "Senior Employee is the highest normal employee rank. Use Make Co-Owner if you want to make this person Co-Owner."
+        );
+
+        return;
+
+    }
+
+    else if (
+        person.role === "co-owner"
+    ) {
+
+        alert(
+            "The Co-Owner cannot be promoted to Owner. Jack stays the Owner."
+        );
+
+        return;
+
+    }
+
+    else {
+
+        return;
+    }
+
+
+    await updateDoc(
+
+        doc(db,"members",name),
+
+        {
+            role:newRole
+        }
+
+    );
+
+
+    showToast(
+        "⬆️ " +
+        name +
+        " promoted to " +
+        niceRole(newRole) +
+        "!"
+    );
+
+};
+
+
+/* DEMOTE */
+
+window.demotePerson =
+async function() {
+
+    const name =
+        selectedName();
+
+    if (!name) return;
+
+
+    const person =
+        members[name];
+
+
+    let newRole;
+
+
+    if (
+        person.role === "co-owner"
+    ) {
+
+        newRole = "senior";
+
+    }
+
+    else if (
+        person.role === "senior"
+    ) {
+
+        newRole = "employee";
+
+    }
+
+    else if (
+        person.role === "employee"
+    ) {
+
+        newRole = "customer";
+
+    }
+
+    else {
+
+        alert(
+            name +
+            " cannot be demoted any lower."
+        );
+
+        return;
+    }
+
+
+    if (
+        !confirm(
+            "Demote " +
+            name +
+            " to " +
+            niceRole(newRole) +
+            "?"
+        )
+    ) return;
+
+
+    await updateDoc(
+
+        doc(db,"members",name),
+
+        {
+
+            role:newRole,
+
+            clockedIn:
+                newRole === "customer"
+                ? false
+                : person.clockedIn
+
+        }
+
+    );
+
+
+    showToast(
+        "⬇️ " +
+        name +
+        " is now " +
+        niceRole(newRole) +
+        "."
+    );
+
+};
+
+
+/* MAKE CO-OWNER */
+
+window.makeCoOwner =
+async function() {
+
+    const name =
+        selectedName();
+
+    if (!name) return;
+
+
+    if (
+        currentUserData.role !==
+        "owner"
+    ) {
+
+        alert(
+            "Only the Owner can choose the Co-Owner."
+        );
+
+        return;
+    }
+
+
+    if (
+        !confirm(
+            "Make " +
+            name +
+            " the Blue Forks Co-Owner?"
+        )
+    ) return;
+
+
+    /*
+    There can only be ONE Co-Owner.
+
+    Any current Co-Owner becomes
+    Senior Employee first.
+    */
+
+    for (
+        const memberName
+        of Object.keys(members)
+    ) {
+
+        if (
+            members[memberName].role ===
+                "co-owner" &&
+            memberName !== name
+        ) {
+
+            await updateDoc(
+
+                doc(
+                    db,
+                    "members",
+                    memberName
+                ),
+
+                {
+                    role:"senior"
+                }
+
+            );
+
+        }
+
+    }
+
+
+    await updateDoc(
+
+        doc(db,"members",name),
+
+        {
+            role:"co-owner"
+        }
+
+    );
+
+
+    showToast(
+        "⭐ " +
+        name +
+        " is now the Co-Owner!"
     );
 
 };
@@ -2680,38 +2893,27 @@ window.kickPerson =
 async function() {
 
     const name =
-        requireSelected();
+        selectedName();
+
+    if (!name) return;
 
 
-    if (!name) {
-        return;
-    }
-
-
-    const sure =
-        confirm(
+    if (
+        !confirm(
             "Kick " +
             name +
-            " from the website?"
-        );
-
-
-    if (!sure) {
-        return;
-    }
+            " from Blue Forks?"
+        )
+    ) return;
 
 
     await updateDoc(
 
-        doc(
-            db,
-            "members",
-            name
-        ),
+        doc(db,"members",name),
 
         {
-            kickAtMs:
-                Date.now()
+            kickAtMs:Date.now(),
+            clockedIn:false
         }
 
     );
@@ -2732,43 +2934,28 @@ window.banPerson =
 async function() {
 
     const name =
-        requireSelected();
+        selectedName();
+
+    if (!name) return;
 
 
-    if (!name) {
-        return;
-    }
-
-
-    const sure =
-        confirm(
+    if (
+        !confirm(
             "Ban " +
             name +
             " from Blue Forks?"
-        );
-
-
-    if (!sure) {
-        return;
-    }
+        )
+    ) return;
 
 
     await updateDoc(
 
-        doc(
-            db,
-            "members",
-            name
-        ),
+        doc(db,"members",name),
 
         {
-
-            banned:
-                true,
-
-            kickAtMs:
-                Date.now()
-
+            banned:true,
+            kickAtMs:Date.now(),
+            clockedIn:false
         }
 
     );
@@ -2789,25 +2976,17 @@ window.unbanPerson =
 async function() {
 
     const name =
-        requireSelected();
+        selectedName();
 
-
-    if (!name) {
-        return;
-    }
+    if (!name) return;
 
 
     await updateDoc(
 
-        doc(
-            db,
-            "members",
-            name
-        ),
+        doc(db,"members",name),
 
         {
-            banned:
-                false
+            banned:false
         }
 
     );
@@ -2844,7 +3023,6 @@ async function() {
         );
 
         return;
-
     }
 
 
@@ -2854,22 +3032,18 @@ async function() {
 
         {
 
-            text:
-                text,
+            text,
 
-            by:
-                currentUserName,
+            by:currentUserName,
 
-            createdAtMs:
-                Date.now()
+            createdAtMs:Date.now()
 
         }
 
     );
 
 
-    input.value =
-        "";
+    input.value = "";
 
 
     showToast(
@@ -2888,14 +3062,11 @@ async function() {
 
         {
 
-            text:
-                "",
+            text:"",
 
-            by:
-                currentUserName,
+            by:currentUserName,
 
-            createdAtMs:
-                Date.now()
+            createdAtMs:Date.now()
 
         }
 
@@ -2914,29 +3085,30 @@ async function() {
 function showPage(page) {
 
     const pages = [
+
         "orderPage",
+
         "confirmationPage",
+
         "employeePage",
+
         "ownerPage"
+
     ];
 
 
-    pages.forEach(
-        function(id) {
+    pages.forEach(function(id) {
 
-            document.getElementById(
-                id
-            ).style.display =
-                "none";
+        document
+            .getElementById(id)
+            .classList.add("hidden");
 
-        }
-    );
+    });
 
 
-    document.getElementById(
-        page
-    ).style.display =
-        "block";
+    document
+        .getElementById(page)
+        .classList.remove("hidden");
 
 }
 
@@ -2944,33 +3116,33 @@ function showPage(page) {
 window.goHome =
 function() {
 
-    showPage(
-        "orderPage"
-    );
+    showPage("orderPage");
 
 };
 
 
-/* CLEAR ORDER FORM */
+/* CLEAR FORM */
 
 function clearForm() {
 
     document.getElementById(
         "pizzaType"
-    ).value =
-        "";
+    ).value = "";
+
+
+    document.getElementById(
+        "drinkType"
+    ).value = "";
 
 
     document.getElementById(
         "firstName"
-    ).value =
-        "";
+    ).value = "";
 
 
     document.getElementById(
         "lastName"
-    ).value =
-        "";
+    ).value = "";
 
 
     document
@@ -2978,40 +3150,30 @@ function clearForm() {
             "#ingredientsBox input"
         )
         .forEach(
-            function(box) {
-
-                box.checked =
-                    false;
-
-            }
+            box =>
+                box.checked = false
         );
 
 
-    sauceChoice =
-        "";
+    sauceChoice = "";
 
 
     document.getElementById(
         "yesSauce"
-    ).classList.remove(
-        "selected"
-    );
+    ).classList.remove("selected");
 
 
     document.getElementById(
         "noSauce"
-    ).classList.remove(
-        "selected"
-    );
+    ).classList.remove("selected");
 
 
-    currentOrder =
-        null;
+    currentOrder = null;
 
 }
 
 
-/* TOAST MESSAGE */
+/* TOAST */
 
 function showToast(text) {
 
@@ -3021,9 +3183,7 @@ function showToast(text) {
         );
 
 
-    toast.textContent =
-        text;
-
+    toast.textContent = text;
 
     toast.style.display =
         "block";
@@ -3036,7 +3196,6 @@ function showToast(text) {
                 "none";
 
         },
-
         3500
     );
 
@@ -3049,35 +3208,20 @@ function escapeText(text) {
 
     return String(text)
 
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
+        .replaceAll("&","&amp;")
 
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
+        .replaceAll("<","&lt;")
 
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
+        .replaceAll(">","&gt;")
 
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
+        .replaceAll('"',"&quot;")
 
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
+        .replaceAll("'","&#039;");
 
 }
 
 
-/* START WEBSITE */
+/* START */
 
 async function startBlueForks() {
 
@@ -3086,24 +3230,22 @@ async function startBlueForks() {
         await setupPeople();
 
 
-        const savedUser =
+        const saved =
             localStorage.getItem(
                 "blueForksCurrentUser"
             );
 
 
-        if (savedUser) {
-
-            const ref =
-                doc(
-                    db,
-                    "members",
-                    savedUser
-                );
-
+        if (saved) {
 
             const snap =
-                await getDoc(ref);
+                await getDoc(
+                    doc(
+                        db,
+                        "members",
+                        saved
+                    )
+                );
 
 
             if (
@@ -3111,12 +3253,9 @@ async function startBlueForks() {
                 !snap.data().banned
             ) {
 
-                startSession(
-                    savedUser
-                );
+                startSession(saved);
 
                 return;
-
             }
 
         }
@@ -3129,10 +3268,9 @@ async function startBlueForks() {
 
     }
 
-    catch (error) {
+    catch(error) {
 
         console.error(error);
-
 
         document.getElementById(
             "loginMessage"
