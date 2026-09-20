@@ -50,10 +50,6 @@
         box-shadow: 0 5px 15px rgba(0,0,0,0.15);
     }
 
-    h2 {
-        margin-top: 0;
-    }
-
     label {
         display: block;
         font-weight: bold;
@@ -86,16 +82,11 @@
         color: white;
     }
 
-    .mainButton:hover {
-        background: #0875b8;
-    }
-
     .ingredientButton {
         width: 100%;
         background: #e5f7ff;
         color: #17324d;
         text-align: left;
-        margin-top: 5px;
     }
 
     #ingredientsBox {
@@ -151,6 +142,7 @@
         padding: 15px;
         border-radius: 15px;
         margin-top: 15px;
+        line-height: 1.7;
     }
 
     .finishButton {
@@ -181,11 +173,10 @@
         margin-bottom: 15px;
     }
 
-    .message {
+    #connectionMessage {
         text-align: center;
         font-weight: bold;
-        font-size: 20px;
-        margin-top: 15px;
+        margin-bottom: 15px;
     }
 </style>
 </head>
@@ -203,6 +194,10 @@
 
 <div class="container">
 
+    <div id="connectionMessage">
+        Connecting to The Blue Forks...
+    </div>
+
     <!-- ORDER PAGE -->
 
     <div id="orderPage">
@@ -211,9 +206,10 @@
 
             <h2>Build Your Pizza</h2>
 
-            <label for="pizzaType">Type of Pizza</label>
+            <label>Type of Pizza</label>
 
             <select id="pizzaType">
+
                 <option value="">Choose a pizza...</option>
                 <option>Cheese Pizza</option>
                 <option>Pepperoni Pizza</option>
@@ -230,14 +226,18 @@
                 <option>Bacon Pizza</option>
                 <option>Chicken Pizza</option>
                 <option>Custom Pizza</option>
+
             </select>
 
 
             <label>Extra Ingredients</label>
 
-            <button class="ingredientButton" onclick="toggleIngredients()">
+            <button
+                class="ingredientButton"
+                onclick="toggleIngredients()">
                 ➕ Ingredients
             </button>
+
 
             <div id="ingredientsBox">
 
@@ -325,16 +325,26 @@
             </div>
 
 
-            <label for="firstName">First Name</label>
-            <input id="firstName" placeholder="First name">
+            <label>First Name</label>
+
+            <input
+                id="firstName"
+                placeholder="First name">
 
 
-            <label for="lastName">Last Name</label>
-            <input id="lastName" placeholder="Last name">
+            <label>Last Name</label>
+
+            <input
+                id="lastName"
+                placeholder="Last name">
 
 
-            <button class="mainButton" onclick="reviewOrder()">
+            <button
+                class="mainButton"
+                onclick="reviewOrder()">
+
                 Review Order 🍕
+
             </button>
 
         </div>
@@ -342,7 +352,7 @@
     </div>
 
 
-    <!-- CONFIRMATION PAGE -->
+    <!-- CONFIRMATION -->
 
     <div id="confirmationPage">
 
@@ -355,17 +365,23 @@
                 class="orderSummary">
             </div>
 
+
             <button
                 class="mainButton"
                 onclick="confirmOrder()">
+
                 ✅ Confirm Order
+
             </button>
+
 
             <button
                 class="mainButton"
                 onclick="editOrder()"
                 style="background:#777;">
+
                 ✏️ Go Back & Edit
+
             </button>
 
         </div>
@@ -373,14 +389,16 @@
     </div>
 
 
-    <!-- ALL ORDERS PAGE -->
+    <!-- ORDERS -->
 
     <div id="ordersPage">
 
         <button
             class="backButton"
             onclick="goHome()">
+
             ← Back
+
         </button>
 
         <div class="card">
@@ -388,7 +406,7 @@
             <h2>🍕 Received Orders</h2>
 
             <div id="ordersList">
-                No orders yet.
+                Loading orders...
             </div>
 
         </div>
@@ -398,40 +416,191 @@
 </div>
 
 
-<script>
+<script type="module">
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    onSnapshot,
+    doc,
+    updateDoc
+}
+from
+"https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyDldRf3kwPDX0oYSQgfZ1RHOH8zK4zvjjA",
+
+    authDomain:
+    "blue-forks.firebaseapp.com",
+
+    projectId:
+    "blue-forks",
+
+    storageBucket:
+    "blue-forks.firebasestorage.app",
+
+    messagingSenderId:
+    "674854811635",
+
+    appId:
+    "1:674854811635:web:ec0d6fe10042729d75c486",
+
+    measurementId:
+    "G-C5X73BCWKH"
+
+};
+
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+
+const db =
+    getFirestore(app);
+
+
 
 let sauceChoice = "";
 
 let currentOrder = null;
 
-let orders =
-    JSON.parse(localStorage.getItem("blueForksOrders")) || [];
+let orders = [];
+
+let ordersLoaded = false;
 
 
-function toggleIngredients() {
+
+const ordersCollection =
+    collection(db, "orders");
+
+
+
+onSnapshot(
+
+    ordersCollection,
+
+    function(snapshot) {
+
+        orders = [];
+
+
+        snapshot.forEach(function(orderDocument) {
+
+            const data =
+                orderDocument.data();
+
+
+            orders.push({
+
+                firebaseId:
+                    orderDocument.id,
+
+                ...data
+
+            });
+
+        });
+
+
+        orders.sort(function(a, b) {
+
+            return (b.createdAtMs || 0) -
+                   (a.createdAtMs || 0);
+
+        });
+
+
+        ordersLoaded = true;
+
+
+        document.getElementById(
+            "connectionMessage"
+        ).textContent =
+            "🟢 Connected — orders are online";
+
+
+        if (
+            document.getElementById(
+                "ordersPage"
+            ).style.display === "block"
+        ) {
+
+            displayOrders();
+
+        }
+
+    },
+
+    function(error) {
+
+        console.error(error);
+
+
+        document.getElementById(
+            "connectionMessage"
+        ).textContent =
+            "🔴 Could not connect to orders.";
+
+    }
+
+);
+
+
+
+window.toggleIngredients =
+function() {
 
     const box =
-        document.getElementById("ingredientsBox");
+        document.getElementById(
+            "ingredientsBox"
+        );
+
 
     if (box.style.display === "block") {
+
         box.style.display = "none";
-    } else {
-        box.style.display = "block";
+
     }
-}
+
+    else {
+
+        box.style.display = "block";
+
+    }
+
+};
 
 
-function chooseSauce(choice) {
+
+window.chooseSauce =
+function(choice) {
 
     sauceChoice = choice;
+
 
     document
         .getElementById("yesSauce")
         .classList.remove("selected");
 
+
     document
         .getElementById("noSauce")
         .classList.remove("selected");
+
 
     if (choice === "Yes") {
 
@@ -439,47 +608,77 @@ function chooseSauce(choice) {
             .getElementById("yesSauce")
             .classList.add("selected");
 
-    } else {
+    }
+
+    else {
 
         document
             .getElementById("noSauce")
             .classList.add("selected");
 
     }
-}
+
+};
 
 
-function reviewOrder() {
+
+window.reviewOrder =
+function() {
 
     const pizza =
-        document.getElementById("pizzaType").value;
+        document.getElementById(
+            "pizzaType"
+        ).value;
+
 
     const firstName =
-        document.getElementById("firstName").value.trim();
+        document.getElementById(
+            "firstName"
+        ).value.trim();
+
 
     const lastName =
-        document.getElementById("lastName").value.trim();
+        document.getElementById(
+            "lastName"
+        ).value.trim();
+
 
 
     if (!pizza) {
-        alert("Please choose a pizza!");
+
+        alert(
+            "Please choose a pizza!"
+        );
+
         return;
+
     }
 
 
     if (!sauceChoice) {
-        alert("Please choose Yes or No for sauce!");
+
+        alert(
+            "Please choose Yes or No for sauce!"
+        );
+
         return;
+
     }
 
 
     if (!firstName || !lastName) {
-        alert("Please enter your first and last name!");
+
+        alert(
+            "Please enter your first and last name!"
+        );
+
         return;
+
     }
 
 
-    const ingredientBoxes =
+
+    const checked =
         document.querySelectorAll(
             "#ingredientsBox input:checked"
         );
@@ -487,37 +686,51 @@ function reviewOrder() {
 
     const ingredients = [];
 
-    ingredientBoxes.forEach(function(box) {
-        ingredients.push(box.value);
+
+    checked.forEach(function(box) {
+
+        ingredients.push(
+            box.value
+        );
+
     });
+
 
 
     currentOrder = {
 
-        id: Date.now(),
+        firstName:
+            firstName,
 
-        firstName: firstName,
+        lastName:
+            lastName,
 
-        lastName: lastName,
+        pizza:
+            pizza,
 
-        pizza: pizza,
+        ingredients:
+            ingredients,
 
-        ingredients: ingredients,
-
-        sauce: sauceChoice,
+        sauce:
+            sauceChoice,
 
         orderedAt:
             new Date().toLocaleString(),
 
-        status: "Received"
+        createdAtMs:
+            Date.now(),
+
+        status:
+            "Received"
+
     };
 
 
-    let ingredientText = "None";
 
-    if (ingredients.length > 0) {
-        ingredientText = ingredients.join(", ");
-    }
+    const ingredientText =
+        ingredients.length
+        ? ingredients.join(", ")
+        : "None";
 
 
     document.getElementById(
@@ -525,7 +738,9 @@ function reviewOrder() {
     ).innerHTML =
 
         "<strong>Name:</strong> " +
-        firstName + " " + lastName +
+        firstName +
+        " " +
+        lastName +
 
         "<br><strong>Pizza:</strong> " +
         pizza +
@@ -537,190 +752,347 @@ function reviewOrder() {
         sauceChoice;
 
 
+
     document.getElementById(
         "orderPage"
-    ).style.display = "none";
+    ).style.display =
+        "none";
 
 
     document.getElementById(
         "confirmationPage"
-    ).style.display = "block";
-}
+    ).style.display =
+        "block";
+
+};
 
 
-function editOrder() {
 
-    document.getElementById(
-        "confirmationPage"
-    ).style.display = "none";
-
-    document.getElementById(
-        "orderPage"
-    ).style.display = "block";
-}
-
-
-function confirmOrder() {
-
-    orders.push(currentOrder);
-
-    saveOrders();
-
-    alert(
-        "🍕 Order received! The Blue Forks is on it!"
-    );
-
-    clearForm();
-
-    goHome();
-}
-
-
-function saveOrders() {
-
-    localStorage.setItem(
-        "blueForksOrders",
-        JSON.stringify(orders)
-    );
-}
-
-
-function showOrders() {
-
-    document.getElementById(
-        "orderPage"
-    ).style.display = "none";
+window.editOrder =
+function() {
 
     document.getElementById(
         "confirmationPage"
-    ).style.display = "none";
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "orderPage"
+    ).style.display =
+        "block";
+
+};
+
+
+
+window.confirmOrder =
+async function() {
+
+    if (!currentOrder) {
+
+        return;
+
+    }
+
+
+    try {
+
+        await addDoc(
+            ordersCollection,
+            currentOrder
+        );
+
+
+        alert(
+            "🍕 Order received! The Blue Forks is on it!"
+        );
+
+
+        clearForm();
+
+        goHome();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+
+        alert(
+            "The order could not be sent. Please try again."
+        );
+
+    }
+
+};
+
+
+
+window.showOrders =
+function() {
+
+    document.getElementById(
+        "orderPage"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "confirmationPage"
+    ).style.display =
+        "none";
+
 
     document.getElementById(
         "ordersPage"
-    ).style.display = "block";
+    ).style.display =
+        "block";
+
+
+    if (!ordersLoaded) {
+
+        document.getElementById(
+            "ordersList"
+        ).textContent =
+            "Loading orders...";
+
+        return;
+
+    }
+
 
     displayOrders();
-}
+
+};
+
 
 
 function displayOrders() {
 
     const list =
-        document.getElementById("ordersList");
+        document.getElementById(
+            "ordersList"
+        );
 
 
     const activeOrders =
         orders.filter(function(order) {
-            return order.status === "Received";
+
+            return order.status ===
+                "Received";
+
         });
 
 
-    if (activeOrders.length === 0) {
+
+    if (
+        activeOrders.length === 0
+    ) {
 
         list.innerHTML =
             "<p>No orders waiting! 🍕</p>";
 
         return;
+
     }
+
 
 
     list.innerHTML = "";
 
 
-    activeOrders.forEach(function(order) {
 
-        let ingredients = "None";
+    activeOrders.forEach(
+        function(order) {
 
-        if (order.ingredients.length > 0) {
-            ingredients =
-                order.ingredients.join(", ");
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "orderCard";
+
+
+
+            const name =
+                document.createElement(
+                    "strong"
+                );
+
+
+            name.textContent =
+                "👤 " +
+                order.firstName +
+                " " +
+                order.lastName;
+
+
+            card.appendChild(name);
+
+
+
+            const details =
+                document.createElement(
+                    "div"
+                );
+
+
+            const ingredients =
+                order.ingredients &&
+                order.ingredients.length
+
+                ? order.ingredients.join(", ")
+
+                : "None";
+
+
+            details.textContent =
+
+                "Pizza: " +
+                order.pizza +
+
+                " | Ingredients: " +
+                ingredients +
+
+                " | Sauce: " +
+                order.sauce +
+
+                " | Ordered: " +
+                order.orderedAt;
+
+
+            details.style.marginTop =
+                "10px";
+
+
+            card.appendChild(details);
+
+
+
+            const finish =
+                document.createElement(
+                    "button"
+                );
+
+
+            finish.className =
+                "finishButton";
+
+
+            finish.textContent =
+                "✅ Finish";
+
+
+            finish.addEventListener(
+                "click",
+
+                function() {
+
+                    finishOrder(
+                        order.firebaseId
+                    );
+
+                }
+
+            );
+
+
+            card.appendChild(finish);
+
+
+
+            const cancel =
+                document.createElement(
+                    "button"
+                );
+
+
+            cancel.className =
+                "cancelButton";
+
+
+            cancel.textContent =
+                "❌ Cancel";
+
+
+            cancel.addEventListener(
+                "click",
+
+                function() {
+
+                    cancelOrder(
+                        order.firebaseId
+                    );
+
+                }
+
+            );
+
+
+            card.appendChild(cancel);
+
+
+            list.appendChild(card);
+
         }
 
+    );
 
-        const card =
-            document.createElement("div");
-
-        card.className = "orderCard";
-
-
-        card.innerHTML =
-
-            "<strong>👤 " +
-            order.firstName +
-            " " +
-            order.lastName +
-            "</strong>" +
-
-            "<br><br>" +
-
-            "<strong>Pizza:</strong> " +
-            order.pizza +
-
-            "<br>" +
-
-            "<strong>Ingredients:</strong> " +
-            ingredients +
-
-            "<br>" +
-
-            "<strong>Sauce:</strong> " +
-            order.sauce +
-
-            "<br>" +
-
-            "<strong>Ordered:</strong> " +
-            order.orderedAt +
-
-            "<br><br>" +
-
-            "<button class='finishButton' " +
-            "onclick='finishOrder(" +
-            order.id +
-            ")'>✅ Finish</button>" +
-
-            "<button class='cancelButton' " +
-            "onclick='cancelOrder(" +
-            order.id +
-            ")'>❌ Cancel</button>";
-
-
-        list.appendChild(card);
-    });
 }
 
 
-function finishOrder(id) {
 
-    const order =
-        orders.find(function(order) {
-            return order.id === id;
-        });
+async function finishOrder(
+    firebaseId
+) {
 
+    try {
 
-    if (!order) {
-        return;
+        await updateDoc(
+
+            doc(
+                db,
+                "orders",
+                firebaseId
+            ),
+
+            {
+
+                status:
+                    "Finished",
+
+                finishedAt:
+                    new Date()
+                    .toLocaleString()
+
+            }
+
+        );
+
     }
 
+    catch (error) {
 
-    order.status = "Finished";
-
-    order.finishedAt =
-        new Date().toLocaleString();
+        console.error(error);
 
 
-    saveOrders();
+        alert(
+            "Could not finish this order."
+        );
 
-    displayOrders();
+    }
 
-
-    alert(
-        "✅ Order finished at " +
-        order.finishedAt
-    );
 }
 
 
-function cancelOrder(id) {
+
+async function cancelOrder(
+    firebaseId
+) {
 
     const sure =
         confirm(
@@ -729,31 +1101,50 @@ function cancelOrder(id) {
 
 
     if (!sure) {
+
         return;
+
     }
 
 
-    const order =
-        orders.find(function(order) {
-            return order.id === id;
-        });
+    try {
 
+        await updateDoc(
 
-    if (!order) {
-        return;
+            doc(
+                db,
+                "orders",
+                firebaseId
+            ),
+
+            {
+
+                status:
+                    "Cancelled",
+
+                cancelledAt:
+                    new Date()
+                    .toLocaleString()
+
+            }
+
+        );
+
     }
 
+    catch (error) {
 
-    order.status = "Cancelled";
-
-    order.cancelledAt =
-        new Date().toLocaleString();
+        console.error(error);
 
 
-    saveOrders();
+        alert(
+            "Could not cancel this order."
+        );
 
-    displayOrders();
+    }
+
 }
+
 
 
 function clearForm() {
@@ -778,7 +1169,9 @@ function clearForm() {
             "#ingredientsBox input"
         )
         .forEach(function(box) {
+
             box.checked = false;
+
         });
 
 
@@ -786,57 +1179,52 @@ function clearForm() {
 
 
     document
-        .getElementById("yesSauce")
-        .classList.remove("selected");
+        .getElementById(
+            "yesSauce"
+        )
+        .classList.remove(
+            "selected"
+        );
 
 
     document
-        .getElementById("noSauce")
-        .classList.remove("selected");
+        .getElementById(
+            "noSauce"
+        )
+        .classList.remove(
+            "selected"
+        );
 
 
     currentOrder = null;
+
 }
 
 
-function goHome() {
+
+window.goHome =
+function() {
 
     document.getElementById(
         "ordersPage"
-    ).style.display = "none";
+    ).style.display =
+        "none";
+
 
     document.getElementById(
         "confirmationPage"
-    ).style.display = "none";
+    ).style.display =
+        "none";
+
 
     document.getElementById(
         "orderPage"
-    ).style.display = "block";
-}
+    ).style.display =
+        "block";
+
+};
 
 </script>
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyDldRf3kwPDX0oYSQgfZ1RHOH8zK4zvjjA",
-    authDomain: "blue-forks.firebaseapp.com",
-    projectId: "blue-forks",
-    storageBucket: "blue-forks.firebasestorage.app",
-    messagingSenderId: "674854811635",
-    appId: "1:674854811635:web:ec0d6fe10042729d75c486",
-    measurementId: "G-C5X73BCWKH"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
 </body>
 </html>
